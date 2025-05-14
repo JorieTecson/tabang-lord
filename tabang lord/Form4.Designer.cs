@@ -82,7 +82,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblDate = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -745,7 +744,6 @@
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.lblDate);
             this.panel1.Controls.Add(this.lblName);
             this.panel1.Location = new System.Drawing.Point(-1, -3);
             this.panel1.Name = "panel1";
@@ -756,23 +754,13 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.LightYellow;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(43, 25);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(113, 84);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
-            // 
-            // lblDate
-            // 
-            this.lblDate.AutoSize = true;
-            this.lblDate.BackColor = System.Drawing.Color.Transparent;
-            this.lblDate.Font = new System.Drawing.Font("Garamond", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblDate.Location = new System.Drawing.Point(65, 140);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(52, 21);
-            this.lblDate.TabIndex = 1;
-            this.lblDate.Text = "label2";
             // 
             // lblName
             // 
@@ -856,7 +844,6 @@
         private System.Windows.Forms.Label lblActive;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer timer1;

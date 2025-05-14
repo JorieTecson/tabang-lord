@@ -16,6 +16,7 @@ namespace tabang_lord
     public partial class Form4 : Form
 
     {
+
         Workbook book = new Workbook();
         int basketball = 0;
         int volleyball = 0;
@@ -27,18 +28,20 @@ namespace tabang_lord
 
         public Form4(string Name)
         {
+
             InitializeComponent();
             name = Name;
             InitializeFileWatcher();
             LoadData();
             DataSorting.datasorting();
+
             
         }
       
 
         private int ShowCounts(int c, string value) 
         {
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+            book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
             Worksheet sheet = book.Worksheets[0];
             int count = 0;
             int rows = sheet.Rows.Length;
@@ -52,11 +55,12 @@ namespace tabang_lord
             }
             return count;
         }
-     
+
         private void InitializeFileWatcher()
         {
+
             fileWatcher = new FileSystemWatcher();
-            fileWatcher.Path = Path.GetDirectoryName(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx");
+            fileWatcher.Path = Path.GetDirectoryName(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx");
             fileWatcher.Changed += fileSystemWatcher1_Changed;
             fileWatcher.EnableRaisingEvents = true; // Start watching
         }
@@ -64,7 +68,8 @@ namespace tabang_lord
 
         public void LoadData()
         {
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+
+            book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
             Worksheet sheet = book.Worksheets[0];
 
             int Rows = sheet.Rows.Length;
@@ -120,12 +125,11 @@ namespace tabang_lord
             basketball = volleyball = onlinegames = others = 0;
         }
 
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             DateTime currentDateTime = DateTime.Now;
             dateTimePicker1.Value = currentDateTime;
-            lblDate.Text = currentDateTime.ToString("MM/dd/yyyy hh:mm:ss tt");
+           
         }
 
         private void btnActive_Click(object sender, EventArgs e)
@@ -173,7 +177,7 @@ namespace tabang_lord
             {
                 
                 MessageBox.Show("You have been logged out.");
-                Application.Exit(); // This will close the application
+               this.Close();
             }
             panel2.Visible = false;
           

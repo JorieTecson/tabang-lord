@@ -46,7 +46,7 @@ namespace tabang_lord
 
             // Proceed to login if both fields are filled
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); // Adjust path as needed
+            book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); // Adjust path as needed
             Worksheet sheet = book.Worksheets[0];
 
             int row = sheet.LastRow;
@@ -91,7 +91,7 @@ namespace tabang_lord
             if (result == DialogResult.Yes)
             {
                 // Log out logic here
-                MessageBox.Show("You have been logged out.");
+                MessageBox.Show("You have been exit.....");
                 Application.Exit(); // This will close the application
             }
          

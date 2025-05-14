@@ -43,6 +43,7 @@
             // btnLogin
             // 
             this.btnLogin.Font = new System.Drawing.Font("Verdana", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.ForeColor = System.Drawing.Color.Green;
             this.btnLogin.Location = new System.Drawing.Point(648, 340);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogin.Name = "btnLogin";

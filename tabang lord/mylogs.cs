@@ -13,7 +13,7 @@ namespace tabang_lord
         public static void Log(string name, string message)
         {
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+            book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
             Worksheet sheet = book.Worksheets[1];
 
             string date = DateTime.Now.ToString("MMMM/d/yyyy");
@@ -26,7 +26,7 @@ namespace tabang_lord
             sheet.Range[r, 3].Value = date;
             sheet.Range[r, 4].Value = time;
 
-            book.SaveToFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx");
+            book.SaveToFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx");
         }
     }
 }

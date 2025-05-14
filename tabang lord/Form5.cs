@@ -25,7 +25,7 @@ namespace tabang_lord
         public void LoadInactiveData()
         {
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+            book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
             Worksheet sheet = book.Worksheets[0];
             DataTable dt = new DataTable();
 
@@ -90,7 +90,7 @@ namespace tabang_lord
                 int count = 0;
 
                 Workbook book = new Workbook();
-                book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+                book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
                 Worksheet sheet = book.Worksheets[0];
                 int row = sheet.Rows.Length;
 
@@ -113,7 +113,7 @@ namespace tabang_lord
                     count++;
                 }
 
-                book.SaveToFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx");
+                book.SaveToFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx");
                 if (hasFound == true)
                 {
                     mylogs.Log(admin.Name, $"Remove {name} in inactive list");
@@ -139,9 +139,9 @@ namespace tabang_lord
         private void btnBack_Click(object sender, EventArgs e)
         {
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+            book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
             Worksheet sheet = book.Worksheets[0];
-            book.SaveToFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx");
+            book.SaveToFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx");
             this.Hide();
         }
     }

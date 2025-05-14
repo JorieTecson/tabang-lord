@@ -16,6 +16,7 @@ namespace tabang_lord
     {
         Form5 form5;
         Form4 form4;
+
         public Form2()
         {
             InitializeComponent();
@@ -27,7 +28,7 @@ namespace tabang_lord
         public void LoadActiveData()
         {
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+            book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
             Worksheet sheet = book.Worksheets[0];
             DataTable dt = new DataTable();
 
@@ -60,7 +61,7 @@ namespace tabang_lord
         public void UpdateDataToExcel(int ID, string name, string gender, string hobbies, string favcolor, string saying, string course, string username, string password, string status, string email, string profilepath, string age)
         {
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+            book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
             Worksheet sheet = book.Worksheets[0];
 
             int index = ID + 2;
@@ -77,7 +78,7 @@ namespace tabang_lord
             sheet.Range[index, 11].Value = status;
             sheet.Range[index, 12].Value = profilepath;
 
-            book.SaveToFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx");
+            book.SaveToFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx");
            mylogs.Log(admin.Name, $"Updating a data");
         }
 
@@ -117,7 +118,7 @@ namespace tabang_lord
                 string name = "";
 
                 Workbook book = new Workbook();
-                book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+                book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
                 Worksheet sheet = book.Worksheets[0];
                 int row = sheet.Rows.Length;
 
@@ -131,7 +132,7 @@ namespace tabang_lord
                     }
                 }
 
-                book.SaveToFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx");
+                book.SaveToFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx");
 
                 if (hasFound == true)
                 {
@@ -184,7 +185,7 @@ namespace tabang_lord
             form1.pictureBox1.ImageLocation = dataGridView1.Rows[r].Cells[11].Value.ToString();
 
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+            book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
             Worksheet sheet = book.Worksheets[2];
 
             int rows = sheet.Rows.Length;
@@ -241,7 +242,7 @@ namespace tabang_lord
             this.Hide();
             form1.Show();
             form1.btnUpdate.Visible = true;
-            form1.txtStatus.Enabled = false;
+          
             form1.dateTimePicker1.Enabled = false;
             form1.btnDisplay.Visible = false;
             form1.btnAdd.Visible = false;
@@ -250,9 +251,9 @@ namespace tabang_lord
         private void btnBack_Click(object sender, EventArgs e)
         {
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+            book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
             Worksheet sheet = book.Worksheets[0];
-            book.SaveToFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx");
+            book.SaveToFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx");
             this.Hide();
         }
 
@@ -282,6 +283,11 @@ namespace tabang_lord
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
 
         }

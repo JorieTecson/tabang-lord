@@ -13,11 +13,11 @@ namespace tabang_lord
         public static void datasorting()
         {
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+            book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
             Worksheet sheet = book.Worksheets[0];
 
             int rowCount = sheet.LastRow;
-            int colCount = sheet.LastColumn;
+            int colCount = sheet.LastColumn; 
 
             List<string[]> data = new List<string[]>();
 
@@ -41,7 +41,7 @@ namespace tabang_lord
                 }
             }
 
-            book.SaveToFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx");
+            book.SaveToFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx");
         }
     }
 }

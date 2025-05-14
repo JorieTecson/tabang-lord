@@ -12,18 +12,28 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Drawing.Imaging;
 
 namespace tabang_lord
 {
     public partial class Form1 : Form
     {
+
         private Form2 form2;
+        private Form4 form4;
         Workbook book = new Workbook();
         public string pathpic;
         public Form1(Form2 form)
         {
             InitializeComponent();
             form2 = form;
+           
+        }
+        public Form1(Form2 form, Form4 form4Ref)
+        {
+            InitializeComponent();
+            form2 = form;
+            form4 = form4Ref;
         }
         private bool ValidateMyForm()
         {
@@ -214,7 +224,7 @@ namespace tabang_lord
 
                 //form2.GetDataFromFr1(name, rad, chk, favcolor, saying);
 
-                book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+                book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
                 Worksheet sheet = book.Worksheets[0];
                 int i = sheet.Rows.Length + 1;
 
@@ -231,7 +241,7 @@ namespace tabang_lord
                 sheet.Range[i, 11].Value = status;
                 sheet.Range[i, 12].Value = profilepath;
 
-                book.SaveToFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx");
+                book.SaveToFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx");
                 mylogs.Log(admin.Name, $"Inserting a data");
                 Form4 form4 = new Form4(admin.Name);
 
@@ -262,7 +272,7 @@ namespace tabang_lord
 
         public void SendBirthdateToExcel(string name, DateTime date)
         {
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+            book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
             Worksheet sheet = book.Worksheets[2];
 
             int i = sheet.Rows.Length + 1;
@@ -270,7 +280,7 @@ namespace tabang_lord
             sheet.Range[i, 1].Value = name;
             sheet.Range[i, 2].Value = date.ToString("MM/dd/yyyy");
 
-            book.SaveToFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx");
+            book.SaveToFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx");
         }
 
         public int CalculateAge(DateTime date)
@@ -287,10 +297,77 @@ namespace tabang_lord
     
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            SaveImageToSavedPhoto();
+            string rad = "";
+            string chk = "";
+            bool isRepeated = false;
+
+            book.LoadFromFile(@"C:\Users\Jojie\Downloads\Book1.xlsx"); //Change the path to where is the excel locate.
+            Worksheet sheet = book.Worksheets[0];
+            if (ValidateMyForm())
+            {
+
+                string email = txtEmail.Text;
+                string gmailPattern = @"^[a-zA-Z0-9._%+-]+@gmail\.com$";
+                if (!Regex.IsMatch(email, gmailPattern))
+                {
+                    MessageBox.Show("Please enter a valid Gmail address (e.g., example@gmail.com).", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtEmail.Focus();
+                    return;
+                }
+                else
+                {
+                    for (int i = 2; i <= sheet.Rows.Length; i++)
+                    {
+                        if (!string.IsNullOrEmpty(txtUserName.Text) && sheet.Range[i, 9].Value == txtUserName.Text)
+                        {
+                            isRepeated = true;
+                            break;
+                        }
+                        else
+                        {
+                            isRepeated = false;
+                        }
+                    }
+                }
+
+                if (isRepeated == true)
+                {
+                    MessageBox.Show("Username already exists. Please choose a different username.", "Duplicate Username", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtUserName.Focus();
+                }
+                else if (isRepeated == false)
+                {
+                    if (pictureBox1.ImageLocation != null)
+                    {
+                        if (dateTimePicker1.Value >= DateTime.Now)
+                        {
+                            MessageBox.Show("Please enter Correct Date.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            ProfileSaveToFolder();
+
+                            InsertData(txtName.Text, rad, chk, cmbFavcolor.Text, txtSaying.Text, txtCourse.Text, txtUserName.Text, txtPassword.Text, txtStatus.Text, txtEmail.Text, pathpic, CalculateAge(dateTimePicker1.Value).ToString());
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No image in PictureBox to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
 
             string rad = "";
             string chk = "";
+
+            book.LoadFromFile(@"C:\Users\Jojie\Downloads\Book1.xlsx"); //Change the path to where is the excel locate.
+            Worksheet sheet = book.Worksheets[0];
 
             if (ValidateMyForm())
             {
@@ -304,39 +381,35 @@ namespace tabang_lord
                 }
                 else
                 {
-                    MessageBox.Show("Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (pictureBox1.ImageLocation != null)
+                    {
+                        if (dateTimePicker1.Value >= DateTime.Now)
+                        {
+                            MessageBox.Show("Please enter Correct Date.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        else
+                        {
+                            int ID = Convert.ToInt32(lblID.Text);
 
-                    InsertData(txtName.Text, rad, chk, cmbFavcolor.Text, txtSaying.Text, txtCourse.Text, txtUserName.Text, txtPassword.Text, txtStatus.Text, txtEmail.Text, pathpic, CalculateAge(dateTimePicker1.Value).ToString());
+                            MessageBox.Show("Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                            ProfileSaveToFolder();
+
+                            if (lblName.Text == admin.Name)
+                            {
+                                form4.pictureBox1.ImageLocation = my_path.picpath;
+                            }
+
+                            InsertUpdatedData(ID, txtName.Text, rad, chk, cmbFavcolor.Text, txtSaying.Text, txtCourse.Text, txtUserName.Text, txtPassword.Text, txtStatus.Text, txtEmail.Text, pathpic);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No image in PictureBox to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
             }
         }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-
-            string email = txtEmail.Text;
-            string gmailPattern = @"^[a-zA-Z0-9._%+-]+@gmail\.com$";
-            if (!Regex.IsMatch(email, gmailPattern))
-            {
-                MessageBox.Show("Please enter a valid Gmail address (e.g., example@gmail.com).", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtEmail.Focus();
-                return;
-            }
-            else
-            {
-
-                SaveImageToSavedPhoto();
-
-                int ID = Convert.ToInt32(lblID.Text);
-                string rad = "";
-                string chk = "";
-
-
-                InsertUpdatedData(ID, txtName.Text, rad, chk, cmbFavcolor.Text, txtSaying.Text, txtCourse.Text, txtUserName.Text, txtPassword.Text, txtStatus.Text, txtEmail.Text, pathpic);
-            }
-        }
-
 
 
         private void btnDisplay_Click(object sender, EventArgs e)
@@ -361,9 +434,8 @@ namespace tabang_lord
         private void btnChoosePic_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
+            openFileDialog1.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
             pictureBox1.ImageLocation = openFileDialog1.FileName;
-
-            string pathpic = "";
         }
         private void SaveImageToSavedPhoto()
         {
@@ -391,6 +463,30 @@ namespace tabang_lord
             }
 
         }
+        private void ProfileSaveToFolder()
+        {
+            if (pictureBox1.Image != null)
+            {
+                //Get the project directory(two levels up from bin\Debug or bin\Release)
+                string projectDir = Directory.GetParent(Application.StartupPath).Parent.Parent.FullName;
+                string savedPhotoFolder = Path.Combine(projectDir, "EVDRV", "Profiles");
+
+                // Ensure the folder exists
+                if (!Directory.Exists(savedPhotoFolder))
+                {
+                    Directory.CreateDirectory(savedPhotoFolder);
+                }
+
+                // Save the image using the username as the file name
+                string fileName = txtUserName.Text + ".png";
+                string savePath = Path.Combine(savedPhotoFolder, fileName);
+
+                pathpic = savePath;
+
+                pictureBox1.Image.Save(savePath, ImageFormat.Png);
+            }
+        }
+
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
@@ -400,9 +496,9 @@ namespace tabang_lord
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+            book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
             Worksheet sheet = book.Worksheets[0];
-            book.SaveToFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx");
+            book.SaveToFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx");
             this.Hide();
         }
     }

@@ -22,11 +22,11 @@ namespace tabang_lord
 
         }
 
-   
+
         public void DisplayLogs()
         {
-            
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+
+            book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
             Worksheet sheet = book.Worksheets[1];
             DataTable dt = new DataTable();
             dt = sheet.ExportDataTable();
@@ -34,15 +34,33 @@ namespace tabang_lord
             dataGridView1.DataSource = dt;
         }
 
-      
+
 
         private void btnBack_Click(object sender, EventArgs e)
         {
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
+            book.LoadFromFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx"); //Change the path to where is the excel locate.
             Worksheet sheet = book.Worksheets[0];
-            book.SaveToFile(@"C:\Users\ACT-STUDENT\Desktop\TECSON\Book25.xlsx");
-            this.Hide();    
+            book.SaveToFile(@"C:\Users\Jojie\OneDrive\Desktop\TECSON\Book25.xlsx");
+            this.Hide();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string searchText = txtSearch.Text.Trim().ToLower();
+
+            dataGridView1.ClearSelection();
+            dataGridView1.CurrentCell = null;
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    string firstName = row.Cells[0].Value?.ToString().ToLower();
+
+                    row.Visible = string.IsNullOrEmpty(searchText) || (firstName != null && firstName.Contains(searchText));
+                }
+            }
         }
     }
 }
