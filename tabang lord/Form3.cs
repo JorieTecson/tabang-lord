@@ -86,7 +86,15 @@ namespace tabang_lord
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult result = MessageBox.Show("Do you want to Exit?", "Logout Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                // Log out logic here
+                MessageBox.Show("You have been logged out.");
+                Application.Exit(); // This will close the application
+            }
+         
         }
     }
     }
